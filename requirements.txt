@@ -1,0 +1,10 @@
+asgiref==3.7.2
+Django
+django-cleanup==8.0.0
+django-jazzmin==2.6.0
+Pillow
+sqlparse==0.4.4
+typing_extensions==4.7.1
+
+# SPECIAL REQUIREMENTS
+django-import-export
