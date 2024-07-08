@@ -158,3 +158,41 @@ def orderfood(request,id):
     obj = FoodOrder.objects.create(item=item,user=us,bill=item.price)
     obj.save()
     return redirect("App_Cloud:viewprofile")
+
+
+
+from django.middleware.csrf import get_token
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
+
+def generate_random_password(length=8):
+    import random
+    import string
+    characters = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(characters) for i in range(length))
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        print(f"CSRF token in session: {get_token(request)}")
+        print(f"CSRF token in POST: {request.POST.get('csrfmiddlewaretoken')}")
+        try:
+            user = User.objects.get(email=email)
+            new_password = generate_random_password()
+            user.set_password(new_password)
+            user.save()
+            send_mail(
+                'Your new password',
+                f'Your new password is: {new_password}',
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+            )
+            messages.success(request, 'A new password has been sent to your email.')
+            return redirect('App_Cloud:login')
+        except User.DoesNotExist:
+            messages.error(request, 'No user is associated with this email address.')
+    return render(request, 'forgot_password.html')

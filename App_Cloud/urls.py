@@ -19,4 +19,6 @@ urlpatterns = [
     path("booknow/<int:res>/<int:tb>/",views.booknow,name="booknow"),
     path("orderfood/<int:id>/",views.orderfood,name="orderfood"),
     path("restaurants/<int:id>/",views.visitresturants,name="visitresturants"),
+    path('forgot-password', views.forgot_password, name='forgot_password'),
+
 ]

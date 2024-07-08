@@ -85,9 +85,12 @@
             </div>
             
            
-            <div class="col-md-6 d-flex justify-content-center">
-              <!-- Simple link -->
+            <!-- <div class="col-md-6 d-flex justify-content-center">
               <a href="#!" data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#exampl">Forgot password?</a>
+            </div> -->
+
+            <div class="col-md-6 d-flex justify-content-center">
+              <a href="{% url 'App_Cloud:forgot_password' %}">Resend password?</a>
             </div>
           </div>
           {% if messages %}
