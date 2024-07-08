@@ -8,3 +8,4 @@ typing_extensions==4.7.1
 
 # SPECIAL REQUIREMENTS
 django-import-export
+django-auto-logout
